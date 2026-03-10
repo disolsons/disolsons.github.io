@@ -12,7 +12,7 @@ if (typeof globalThis.crypto.hash !== 'function') {
 }
 
 export default defineConfig({
-  base: '/retro-personal-site',
+  base: '/',
   plugins: [react()],
   server: {
     proxy: {

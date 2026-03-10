@@ -28,11 +28,3 @@ Then run the frontend with `npm run dev` (from the project root). The app proxie
 npm run build
 npm run preview
 ```
-
-## Upload to photography page
-
-```
-curl -X POST http://{url-base}:3000/api/photos \
-  -F "photo=@/absolute/path/to/your-image.jpg" \
-  -F "alt=alt-text"
-```

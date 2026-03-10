@@ -1,21 +1,35 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { db } from '../../firebaseConfig'
+import { collection, addDoc, query, orderBy, onSnapshot } from "firebase/firestore"
 
-const initialEntries = [
-  { name: 'Sowny', message: 'Testing the guestbook!', date: '2026-03-10' },
-]
 
 export default function Guestbook() {
-  const [entries, setEntries] = useState(initialEntries)
+  const [entries, setEntries] = useState([])
   const [name, setName] = useState('')
   const [message, setMessage] = useState('')
+  const MAX_CHARS = 280; 
 
-  const handleSubmit = (e) => {
+
+    // Listen for real-time updates
+    useEffect(() => {
+      const q = query(collection(db, "guestbook"), orderBy("date", "desc"))
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+        setEntries(data)
+      })
+      return () => unsubscribe() // Clean up listener
+    }, [])
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (!name.trim() || !message.trim()) return
-    setEntries([
-      { name: name.trim(), message: message.trim(), date: new Date().toISOString().slice(0, 10) },
-      ...entries,
-    ])
+
+    await addDoc(collection(db, "guestbook"), {
+      name: name.trim(),
+      message: message.trim(),
+      date: new Date().toISOString().slice(0, 10)
+    })
+
     setName('')
     setMessage('')
   }
@@ -23,7 +37,7 @@ export default function Guestbook() {
   return (
     <>
       <h2>★ GUESTBOOK ★</h2>
-      <p>Sign my guestbook! Leave your name and a message below.</p>
+      <p>Sign my guestbook! Leave your name and a message below. (280 character limit).</p>
       <form onSubmit={handleSubmit} style={{ marginBottom: '1.5rem' }}>
         <div style={{ marginBottom: '0.75rem' }}>
           <label htmlFor="gb-name" style={{ display: 'block', marginBottom: '0.25rem' }}>
@@ -54,8 +68,9 @@ export default function Guestbook() {
             id="gb-msg"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Say something nice!"
+            placeholder="Say something nice! (Or not :S)"
             rows={3}
+            maxLength={MAX_CHARS} 
             style={{
               width: '100%',
               maxWidth: '400px',
@@ -67,11 +82,20 @@ export default function Guestbook() {
               resize: 'vertical',
             }}
           />
+        <br></br>  
+        <span className={`char-counter ${message.length > MAX_CHARS - 20 ? 'limit-near' : ''} ${message.length === MAX_CHARS ? 'limit-reached' : ''}`}>
+          {message.length}/{MAX_CHARS}
+        </span>
         </div>
         <button type="submit" className="nav-btn">
           SIGN GUESTBOOK
         </button>
       </form>
+      <div className="badge-container">
+      <div className="neon-badge">
+        Powered by <span>Firebase</span>
+      </div>
+      </div>
       <hr style={{ border: '1px dashed var(--neon-pink)', margin: '1rem 0' }} />
       <p><strong>Previous entries:</strong></p>
       {entries.map((entry, i) => (

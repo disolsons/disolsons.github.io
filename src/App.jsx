@@ -1,22 +1,38 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Marquee from './components/Marquee'
 import Nav from './components/Nav'
 import Home from './pages/Home'
 import About from './pages/About'
 import Links from './pages/Links'
 import Guestbook from './pages/Guestbook'
-import Photography from './pages/Photography'
 
 const PAGES = {
   home: 'home',
   about: 'about',
   links: 'links',
-  photography: 'photography',
   guestbook: 'guestbook',
 }
 
 export default function App() {
   const [page, setPage] = useState(PAGES.home)
+
+  useEffect(() => {
+    const syncFromHash = () => {
+      const hash = window.location.hash.replace('#', '')
+      if (hash && Object.values(PAGES).includes(hash)) {
+        setPage(hash)
+      }
+    }
+
+    syncFromHash()
+    window.addEventListener('hashchange', syncFromHash)
+    return () => window.removeEventListener('hashchange', syncFromHash)
+  }, [])
+
+  const handleNavigate = (nextPage) => {
+    setPage(nextPage)
+    window.location.hash = nextPage
+  }
 
   const renderPage = () => {
     switch (page) {
@@ -24,8 +40,6 @@ export default function App() {
         return <About />
       case PAGES.links:
         return <Links />
-      case PAGES.photography:
-        return <Photography />
       case PAGES.guestbook:
         return <Guestbook />
       default:
@@ -35,20 +49,20 @@ export default function App() {
 
   return (
     <>
-      <Marquee text="★ WELCOME TO MY HOMEPAGE ★ COME BACK SOON ★ YOU ARE VISITOR # ??? ★ BEST VIEWED WITH NETSCAPE ★" />
+      <Marquee text="★ WELCOME TO SOWNY'S AFTERHOURS! -- FEEL FREE TO WRITE SOMETHING ON THE GUESTBOOK! ★"/>
       <div className="main-frame">
         <header className="header">
-          <p className="blink">► HI! WELCOME ◄</p>
-          <h1 className="title">MY COOL HOMEPAGE</h1>
-          <p className="subtitle">~ Est. 2025 ~</p>
+          <p className="blink">► WELCOME TO ◄</p>
+          <h1 className="title">SOWNY'S AFTER HOURS</h1>
+          {/* <p className="subtitle">~ Est. 2025 ~</p> */}
         </header>
-        <Nav currentPage={page} onNavigate={setPage} pages={PAGES} />
+        <Nav currentPage={page} onNavigate={handleNavigate} pages={PAGES} />
         <main className="content">
           {renderPage()}
         </main>
         <footer className="footer">
-          <span className="visitor-count">VISITORS: 001337</span>
-          <span className="copyright">© 2025 • Made with 💜 and React</span>
+          <span className="visitor-count">VISITORS: UNKNOWN - I still haven't added a counter!</span>
+          <span className="copyright">Made with 💜 and React</span>
         </footer>
       </div>
     </>

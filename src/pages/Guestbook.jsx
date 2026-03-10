@@ -1,8 +1,7 @@
 import { useState } from 'react'
 
 const initialEntries = [
-  { name: 'Surfer_Dude_92', message: 'Rad site! Totally tubular.', date: '2025-03-01' },
-  { name: 'WebMaster', message: 'Nice marquee. Very nostalgic.', date: '2025-03-02' },
+  { name: 'Sowny', message: 'Testing the guestbook!', date: '2026-03-10' },
 ]
 
 export default function Guestbook() {

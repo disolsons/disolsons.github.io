@@ -14,8 +14,7 @@
   --bg-tile: #1a1a3e;
   --text-bright: #ffffff;
   --pixel-font: 'Press Start 2P', cursive;
-  /* Retro body font: Varela Round (soft rounded) or try 'VT323' for terminal/90s */
-  --body-font: 'Varela Round', sans-serif;
+  --body-font: 'Lucida Console', monospace;
 }
 
 * {

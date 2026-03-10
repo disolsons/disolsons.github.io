@@ -3,17 +3,20 @@ export default function Home() {
     <>
       <h2>★ WELCOME ★</h2>
       <p>
-        Hey there! You've found my little corner of the internet. Grab a soda,
-        put on some dial-up sounds, and stay a while!
-      </p>
-      <p>
-        This site is built with <strong>React.js</strong> but styled like the good
-        old days—neon colors, marquees, and that classic 90s vibe. No frames,
-        no &lt;blink&gt; abuse (okay, maybe a little).
+        Hey there! You've found my corner of the internet! Look around!
       </p>
       <div className="construction">
         <span>🔧</span> This site is always under construction! <span>🔧</span>
       </div>
+      <br></br>
+      <h2>★ ABOUT THIS SITE ★</h2>
+      <p>
+        This site is built with React.js and styled like the early internet days (because they were the best days). Hosted in Github Pages, currently looking for good options to host the backend so I may add some more cool (and persistent) stuff - If you have any suggesitions let me know! 
+      </p>
+      <p>
+        <strong>Contact:</strong> You can leave a message in the{' '}
+        <a href="#guestbook">Guestbook</a>
+      </p>
     </>
   )
 }

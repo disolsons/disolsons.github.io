@@ -29,7 +29,6 @@ npm run build
 npm run preview
 ```
 
-
 ## Upload to photography page
 
 ```

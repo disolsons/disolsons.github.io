@@ -2,10 +2,10 @@ import { Unity, useUnityContext } from "react-unity-webgl";
 
 export default function Pixels() {
     const { unityProvider } = useUnityContext({
-        loaderUrl: "../../Build/UnityProjects.loader.js",
-        dataUrl: "../../Build/UnityProjects.data.br",
-        frameworkUrl: "../../Build/UnityProjects.framework.js.br",
-        codeUrl: "../../Build/UnityProjects.wasm.br",
+        loaderUrl: "/Build/UnityProjects.loader.js",
+        dataUrl: "/Build/UnityProjects.data.unityweb",
+        frameworkUrl: "/Build/UnityProjects.framework.js.unityweb",
+        codeUrl: "/Build/UnityProjects.wasm.unityweb",
         webglContextAttributes: {
             preserveDrawingBuffer: true,
             alpha: true, 

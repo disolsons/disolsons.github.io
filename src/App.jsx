@@ -70,7 +70,7 @@ export default function App() {
         </main>
         <footer className="footer">
           <span className="visitor-count">TOTAL VISITORS: {count ?? '...'}</span>
-          <span className="copyright"><img src="../resources/small-web-badge.gif"></img></span>
+          <span className="copyright"><img src="resources/small-web-badge.gif"></img></span>
         </footer>
       </div>
     </>

@@ -18,7 +18,8 @@ export default function Pixels() {
         <br></br>
         <br></br>
         <h3>Cyberpunk Room</h3>
-        <div>Made in Unity, just some cyberpunk pixel assets.. but you can use the arrow keys to walk around!</div>
+        <div>Just some cyberpunk pixel assets that I made with Aseprite thrown together in Unity. I really like the Light2D components unity provides! The playable character has a very clunky walking animatio.. but you can use the arrow keys to walk around!</div>
+        <br></br>
         <div className="game-container">
           <Unity unityProvider={unityProvider} style={{ width: 800, height: 600 }} />
         </div>

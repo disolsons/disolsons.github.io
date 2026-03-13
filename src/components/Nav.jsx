@@ -2,6 +2,7 @@ export default function Nav({ currentPage, onNavigate, pages }) {
   const items = [
     { key: pages.home, label: 'HOME' },
     { key: pages.about, label: 'ABOUT ME' },
+    { key: pages.pixels, label: 'PIXELS' },
     { key: pages.links, label: 'LINKS' },
     { key: pages.guestbook, label: 'GUESTBOOK' },
   ]

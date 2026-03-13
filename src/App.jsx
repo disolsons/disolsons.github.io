@@ -4,18 +4,21 @@ import Nav from './components/Nav'
 import Home from './pages/Home'
 import About from './pages/About'
 import Links from './pages/Links'
+import Pixels from './pages/Pixels'
 import Guestbook from './pages/Guestbook'
 import VisitorCounter from './components/VisitorCounter';
 
 const PAGES = {
   home: 'home',
   about: 'about',
+  pixels: 'pixels',
   links: 'links',
   guestbook: 'guestbook',
 }
 
 export default function App() {
   const [page, setPage] = useState(PAGES.home)
+  
 
   useEffect(() => {
     const syncFromHash = () => {
@@ -39,6 +42,8 @@ export default function App() {
     switch (page) {
       case PAGES.about:
         return <About />
+      case PAGES.pixels:
+        return <Pixels />
       case PAGES.links:
         return <Links />
       case PAGES.guestbook:
